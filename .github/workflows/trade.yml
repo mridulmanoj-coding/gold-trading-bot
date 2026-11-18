@@ -1,11 +1,10 @@
 name: Gold trading bot
 
 on:
-  schedule:
-    # Every 15 minutes on weekdays, 13:00-21:59 UTC.
-    # That covers market hours (9:30am-4pm New York) in both summer and winter time.
-    - cron: "7,22,37,52 13-21 * * 1-5"
   workflow_dispatch:
+
+concurrency:
+  group: gold-bot
 
 jobs:
   trade:
@@ -20,3 +19,4 @@ jobs:
         env:
           API_KEY: ${{ secrets.API_KEY }}
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          
